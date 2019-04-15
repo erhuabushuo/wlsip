@@ -31,15 +31,18 @@
   <send retrans="500">
     <![CDATA[
 
-      INVITE sip:[field2]@[remote_ip] SIP/2.0
+      INVITE sip:[field2]@[remote_ip]:[remote_port] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       From: <sip:[field0]@[field1]>;tag=[call_number]
       To: <sip:[field2]@[field1]>
       Call-ID: [call_id]
       CSeq: [cseq] INVITE
       Contact: <sip:[field0]@[local_ip]:[local_port]>
-      Max-Forwards: 70
       Content-Type: application/sdp
+      Allow: INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, NOTIFY, MESSAGE, SUBSCRIBE, INFO
+      Max-Forwards: 70
+      User-Agent: ItLong
+      Subject: Phone call
       Content-Length: [len]
 
       v=0
@@ -47,8 +50,15 @@
       s=-
       c=IN IP[media_ip_type] [media_ip]
       t=0 0
-      m=audio [media_port] RTP/AVP 0
-      a=rtpmap:0 PCMU/8000
+      m=audio [media_port] RTP/AVP 8
+      a=rtpmap:124 opus/48000
+      a=fmtp:124 useinbandfec=1; usedtx=1
+      a=rtpmap:111 speex/16000
+      a=fmtp:111 vbr=on
+      a=rtpmap:110 speex/8000
+      a=fmtp:110 vbr=on
+      a=rtpmap:101 telephone-event/8000
+      a=fmtp:101 0-11
 
     ]]>
   </send>
@@ -68,7 +78,7 @@
   <send>
     <![CDATA[
 
-      ACK sip:[field2]@[remote_ip] SIP/2.0
+      ACK sip:[field2]@[remote_ip]:[remote_port] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       From: <sip:[field0]@[field1]>;tag=[call_number]
       [last_To:]

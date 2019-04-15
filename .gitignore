@@ -2,3 +2,4 @@ build/
 dist/
 wlsip.egg-info/
 venv/
+.vscode/
