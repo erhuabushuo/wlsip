@@ -28,7 +28,7 @@
   <recv response="200">
   </recv>
 
-  <pause milliseconds="90000"/>
+  <pause milliseconds="1440000"/>
 
   <!-- response time repartition table (ms)   -->
   <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
