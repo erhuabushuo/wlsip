@@ -8,9 +8,6 @@ import click
 from .utils import get_script_directory
 
 def uas(max_call_count, max_currency, cps, localhost, serverhost):
-    """
-    sipp 47.96.84.248:518 -sf xml/uas.xml -oocsf xml/ooc.xml -inf csv/callees.csv -m 1 -l 1 -r 1 -t un -i 10.10.10.106 -trace_msg -trace_err -message_file log/trace_msg.log -error_file log/trace_err.log
-    """
     # 生成注册用户
     handle = NamedTemporaryFile(mode='wt', delete=False)
     handle.write('SEQUENTIAL\n')
@@ -27,6 +24,6 @@ def uas(max_call_count, max_currency, cps, localhost, serverhost):
     uas_xml_file_path = os.path.join(script_directory, 'xml/uas.xml')
     ooc_xml_file_path = os.path.join(script_directory, 'xml/ooc.xml')
 
-    cmd = f"sipp {serverhost} -sf {uas_xml_file_path} -aa -oocsf {ooc_xml_file_path} -inf {user_file_path} -m {max_call_count} -l {max_currency} -r {cps} -t un -i {localhost} -trace_msg -trace_err -message_file /tmp/trace_msg.log -error_file /tmp/trace_err.log"
+    cmd = f"sipp {serverhost} -sf {uas_xml_file_path} -aa -oocsf {ooc_xml_file_path} -inf {user_file_path} -m {max_call_count} -l {max_currency} -r {cps} -t un -i {localhost} -trace_msg -trace_err -message_file /tmp/trace_msg.log -error_file /tmp/trace_err.log  -trace_stat -stf uas_stat.csv"
     print(cmd)
     subprocess.call(cmd, shell=True)
