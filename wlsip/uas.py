@@ -24,6 +24,6 @@ def uas(max_call_count, max_currency, cps, localhost, serverhost):
     uas_xml_file_path = os.path.join(script_directory, 'xml/uas.xml')
     ooc_xml_file_path = os.path.join(script_directory, 'xml/ooc.xml')
 
-    cmd = f"sipp {serverhost} -sf {uas_xml_file_path} -aa -oocsf {ooc_xml_file_path} -inf {user_file_path} -m {max_call_count} -l {max_currency} -r {cps} -t un -i {localhost} -trace_msg -trace_err -message_file /tmp/trace_msg.log -error_file /tmp/trace_err.log  -trace_stat -stf uas_stat.csv"
+    cmd = f"sipp {serverhost} -sf {uas_xml_file_path} -aa -oocsf {ooc_xml_file_path} -inf {user_file_path} -m {max_call_count} -l {max_currency} -r {cps} -t un -i {localhost} -default_behaviors all -trace_msg -trace_err -message_file /tmp/trace_msg.log -error_file /tmp/trace_err.log  -trace_stat -stf uas_stat.csv"
     print(cmd)
     subprocess.call(cmd, shell=True)

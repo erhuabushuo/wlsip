@@ -93,6 +93,26 @@
 
   <pause milliseconds="60000"/>
 
+  <send retrans="500">
+    <![CDATA[
+
+      BYE sip:[field2]@[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: <sip:[field0]@[field1]>;tag=[call_number]      
+      [last_To:]
+      Call-ID: [call_id]
+      CSeq: [cseq] BYE
+      Contact: sip:[field0]@[local_ip]:[local_port]
+      Max-Forwards: 70
+      Content-Length: 0
+
+    ]]>
+  </send>
+
+  <!-- The 'crlf' option inserts a blank line in the statistics report. -->
+  <recv response="200" crlf="true">
+  </recv>
+
   <!-- response time repartition table (ms)   -->
   <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
 

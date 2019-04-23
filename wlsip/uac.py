@@ -23,6 +23,6 @@ def uac(max_call_count, max_currency, cps, localhost, serverhost):
     script_directory = get_script_directory()
     uac_xml_file_path = os.path.join(script_directory, 'xml/uac.xml')
 
-    cmd = f"sipp {serverhost} -sf {uac_xml_file_path} -aa -inf {user_file_path} -m {max_call_count} -l {max_currency} -r {cps} -t un -i {localhost} -trace_msg -trace_err -message_file /tmp/trace_msg.log -error_file /tmp/trace_err.log  -trace_stat -stf uac_stat.csv"
+    cmd = f"sipp {serverhost} -sf {uac_xml_file_path} -aa -inf {user_file_path} -m {max_call_count} -l {max_currency} -r {cps} -t un -i {localhost} -default_behaviors all -trace_msg -trace_err -message_file /tmp/trace_msg.log -error_file /tmp/trace_err.log  -trace_stat -stf uac_stat.csv"
     print(cmd)
     subprocess.call(cmd, shell=True)
